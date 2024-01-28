@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://220.75.221.68:33306/security?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&serverTimezone=UTC
+    username: cos
+    password: cos1234
+    
+  jpa:
+    hibernate:
+      ddl-auto: update #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 1004955819263-dbbuih8qqnj93scts1mpsat3031dsnf4.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+            - email
+            - profile
+            
+          naver:
+            client-id: 37M53kPhXZOMjSB1Mp5M
+            client-secret: 4BGcuTXnVJ
+            scope:
+            - name
+            - email
+            client-name: Naver
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/naver
+            
+        provider:
+          naver:
+            authorization-uri: https://nid.naver.com/oauth2.0/authorize
+            token-uri: https://nid.naver.com/oauth2.0/token
+            user-info-uri: https://openapi.naver.com/v1/nid/me
+            user-name-attribute: response #회원정보를 json으로 받는데 response라는 키값으로 네이버가 리턴해줌.
+            
+          #facebook
